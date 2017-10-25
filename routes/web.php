@@ -14,3 +14,28 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/todo', [
+  'uses' => 'TodosController@index',
+  'as' => 'todos'
+]);
+
+Route::post('/todo/create', [
+  'uses' => 'TodosController@store',
+  'as' => 'todo.create'
+]);
+
+Route::get('/todo/delete/{id}',[
+  'uses' => 'TodosController@delete',
+  'as' => 'todo.delete'
+]);
+
+Route::get('/todo/update/{id}',[
+  'uses' => 'TodosController@update',
+  'as' => 'todo.update'
+]);
+
+Route::post('/todo/save/{id}',[
+  'uses' => 'TodosController@save',
+  'as' => 'todo.save'
+]);
