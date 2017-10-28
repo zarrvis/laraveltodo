@@ -10,14 +10,21 @@
       </form>
     </div>
   </div>
-
   <hr>
+
+  {{-- @if(!empty($todos)) --}}
+  @if($todos->count()>0)
     @foreach ($todos as $todo)
       {{ $todo->todo }}
-      <a href="{{ route('todo.delete', ['id' => $todo->id]) }}" class="btn btn-danger btn-xs">x</a>
-      <a href="{{ route('todo.update', ['id' => $todo->id]) }}" class="btn btn-success btn-xs">edit</a>
-
+      <a href="{{ route('todo.view', ['id' => $todo->id]) }}" class="btn btn-success btn-xs">view</a>
+      <a href="{{ route('todo.update', ['id' => $todo->id]) }}" class="btn btn-warning btn-xs">edit</a>
+      <a href="{{ route('todo.delete', ['id' => $todo->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')">x</a>
     <hr>
     @endforeach
+  @else
+    <div class="alert alert-danger">You have no data</div>
+  @endif
 
+  {{-- {!! $todos->render() !!} --}}
+  {!! $todos->links() !!}
 @stop

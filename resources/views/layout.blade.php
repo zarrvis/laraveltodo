@@ -66,21 +66,9 @@
         </style>
     </head>
     <body>
-      @if (Session::has('success'))
-        <div class="alert alert-success" role="alert">
-          {{ Session::get('success') }}
-        </div>
-      @endif
 
-      @if (count($errors) > 0)
-        <ul class="list-group">
-          @foreach ($errors->all() as $error)
-            <li class="list-group-item text-danger">
-              {{ $error }}
-            </li>
-          @endforeach
-        </ul>
-      @endif
+
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -94,6 +82,28 @@
             @endif
 
             <div class="content">
+              @if (Session::has('success'))
+                <div class="alert alert-success" role="alert">
+                  {{ Session::get('success') }}
+                </div>
+              @endif
+
+              {{-- @if($errors->any()) --}}
+              @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                      @endforeach
+                </div>
+                {{-- <ul class="list-group">
+                  @foreach ($errors->all() as $error)
+                    <li class="list-group-item text-danger">
+                      {{ $error }}
+                    </li>
+                  @endforeach
+                </ul> --}}
+              @endif
+
                 <div class="title m-b-md">
                   @yield('content')
                 </div>

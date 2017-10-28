@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 class TodosController extends Controller
 {
     public function index(){
-      $todos = Todo::all();
+      $todos = Todo::latest()->paginate(3);
+      //xx$todos = Todo::orderBy('created','desc')->get();
+      return view('todo')->with('todos', $todos);
+      //xxreturn view('todo',['todos'=>$todos]);
+    }
 
-      return view('todo')->with('todos',$todos);
+    public function view($id){
+      $views = Todo::find($id);
+      return view('view')->with('views', $views);
     }
 
     public function store(Request $request){

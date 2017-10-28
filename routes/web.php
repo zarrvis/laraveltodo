@@ -35,6 +35,8 @@ Route::get('/todo/update/{id}',[
   'as' => 'todo.update'
 ]);
 
+Route::get('/todo/view/{id}','TodosController@view')->name('todo.view');
+
 Route::post('/todo/save/{id}',[
   'uses' => 'TodosController@save',
   'as' => 'todo.save'
